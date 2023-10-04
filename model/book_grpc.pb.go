@@ -87,7 +87,6 @@ type BookServiceServer interface {
 	UpdateBook(context.Context, *BookUpdateRequest) (*ListBooksResponse, error)
 	DeleteBook(context.Context, *BookDeleteRequest) (*ListBooksResponse, error)
 	ListBooks(context.Context, *ListBooksRequest) (*ListBooksResponse, error)
-	mustEmbedUnimplementedBookServiceServer()
 }
 
 // UnimplementedBookServiceServer must be embedded to have forward compatible implementations.
@@ -105,14 +104,6 @@ func (UnimplementedBookServiceServer) DeleteBook(context.Context, *BookDeleteReq
 }
 func (UnimplementedBookServiceServer) ListBooks(context.Context, *ListBooksRequest) (*ListBooksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBooks not implemented")
-}
-func (UnimplementedBookServiceServer) mustEmbedUnimplementedBookServiceServer() {}
-
-// UnsafeBookServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BookServiceServer will
-// result in compilation errors.
-type UnsafeBookServiceServer interface {
-	mustEmbedUnimplementedBookServiceServer()
 }
 
 func RegisterBookServiceServer(s grpc.ServiceRegistrar, srv BookServiceServer) {
