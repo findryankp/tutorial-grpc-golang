@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package=".";
+
+package book;
+
+service BookService {
+  rpc CreateBook (BookCreateRequest) returns (ListBooksResponse);
+  rpc UpdateBook (BookUpdateRequest) returns (ListBooksResponse);
+  rpc DeleteBook (BookDeleteRequest) returns (ListBooksResponse);
+  rpc ListBooks (ListBooksRequest) returns (ListBooksResponse);
+}
+
+message BookCreateRequest {
+    string Title = 1;
+    string Author = 2;
+}
+
+message BookUpdateRequest {
+    int64 IDBook = 1;
+    string Title = 2;
+    string Author = 3;
+}
+
+message BookDeleteRequest {
+    int64 IDBook = 1;
+}
+
+message ListBooksRequest{
+    int64 IDBook = 1;
+    string Title = 2;
+    string Author = 3;
+}
+
+message ListBooksResponse {
+    string Messages = 1;
+    string Code = 2;
+    repeated BookResponse Data = 3;
+}
+
+message BookResponse {
+    int64 IDBook = 1;
+    string Title = 2;
+    string Author = 3;
+}
